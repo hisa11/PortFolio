@@ -1,0 +1,138 @@
+body {
+    display: flex;
+    margin: 0;
+    font-family: 'BIZ UDPGothic', sans-serif;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #333;
+    color: white;
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+}
+
+.sidebar h2 {
+    padding-left: 10px; /* 左側にスペースを追加 */
+    font-family: 'GenWanMin2-SB', serif;
+    font-size: 30px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 10px 10px 20px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #575757;
+}
+
+.main-content {
+    margin-left: 200px; /* サイドバーの幅と同じ */
+    width: calc(100% - 200px); /* サイドバーを除いた幅 */
+    min-height: 100vh; /* 最低でもビューポートの高さ */
+    padding-top: 20px; /* 上部に余白を追加 */
+}
+
+header {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #444444; /* 黒色の線 */
+}
+
+.post-it {
+    float: left;
+    margin-right: 20px; /* 右側にスペースを追加 */
+    width: 350px; /* 必要に応じてサイズを調整 */
+    height: auto;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    background: #ffeb3b; /* 付箋のような背景色 */
+    padding: 10px;
+    transform: rotate(-5deg); /* 少し傾ける */
+    border: 1px solid #ccc; /* 薄い枠線 */
+}
+
+.content {
+    padding: 20px;
+    overflow: hidden; /* floatの影響を受けないようにする */
+}
+
+.content p {
+    text-align: right;
+}
+
+.content h2 {
+    border-bottom: 2px solid #615e5ea9; /* 黒色の線 */
+    clear: both; /* floatの影響を受けないようにする */
+}
+
+.content h3 {
+    text-align: center;
+}
+
+.content p {
+    text-align: center;
+}
+
+.about-text {
+    text-align: left; /* 左寄せにする */
+}
+
+.self-introduction {
+    text-align: left; /* 左寄せにする */
+}
+
+.about-text p {
+    text-align: left;
+    font-size: 22px;
+    font-family: 'GenWanMin2-SB', serif;
+    line-height: 1.2; /* 行間を調整 */
+}
+
+.about-text h3 {
+    text-align: left;
+    font-size: 32px;
+    font-family: 'GenWanMin2-SB', serif;
+    line-height: 1.2; /* 行間を調整 */
+}
+
+.self-introduction p {
+    text-align: left;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #000;
+    text-decoration: none;
+    position: relative; /* 相対位置を設定 */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 応答を鈍くする */
+}
+
+.read-more::before {
+    content: '＞'; /* 矢印を追加 */
+    font-size: 16px;
+    color: #000;
+    margin-right: 5px; /* 矢印とテキストの間にスペースを追加 */
+}
+
+.read-more:hover {
+    background-color: yellow; /* ホバー時の背景色を黄色に */
+}
+
+.read-more:active {
+    background-color: white; /* クリック時の背景色を白に */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); /* 内向きの影を追加 */
+}

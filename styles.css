@@ -11,27 +11,35 @@ body {
     height: 100vh;
     padding-top: 20px;
     position: fixed;
+    transition: width 0.3s ease, background-color 0.3s ease; /* サイズと背景色の変化をスムーズに */
+}
+
+.sidebar:hover {
+    width: 300px; /* ホバー時に幅を広げる */
+    background-color: rgba(51, 51, 51, 0.8); /* 半透明にする */
 }
 
 .sidebar h2 {
     padding-left: 10px; /* 左側にスペースを追加 */
     font-family: 'GenWanMin2-SB', serif;
-    font-size: 30px;
+    font-size: 35px;
 }
 
 .sidebar ul {
     list-style-type: none;
-    padding: 0;
+    padding: 5px 0;
 }
 
 .sidebar ul li {
-    padding: 10px 10px 10px 20px;
+    padding: 10px 10px 20px;
 }
 
 .sidebar ul li a {
     color: white;
     text-decoration: none;
     display: block;
+    font-size: 20px;
+    transition: background-color 0.5s ease; /* 背景色の変化をスムーズに */
 }
 
 .sidebar ul li a:hover {
@@ -43,12 +51,22 @@ body {
     width: calc(100% - 200px); /* サイドバーを除いた幅 */
     min-height: 100vh; /* 最低でもビューポートの高さ */
     padding-top: 20px; /* 上部に余白を追加 */
+    transition: margin-left 0.3s ease; /* サイドバーの変化に合わせてスムーズに移動 */
+}
+
+.sidebar:hover ~ .main-content {
+    margin-left: 300px; /* サイドバーが広がったときのマージン */
 }
 
 header {
     padding: 10px;
     text-align: left;
     border-bottom: 2px solid #444444; /* 黒色の線 */
+}
+
+header h1 {
+    font-size: 40px;
+    /* font-family: 'GenWanMin2-SB', serif; */
 }
 
 .post-it {
@@ -73,6 +91,7 @@ header {
 }
 
 .content h2 {
+    font-size: 30px;
     border-bottom: 2px solid #615e5ea9; /* 黒色の線 */
     clear: both; /* floatの影響を受けないようにする */
 }

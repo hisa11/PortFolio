@@ -1,89 +1,94 @@
 body {
     display: flex;
     margin: 0;
-    font-family: 'BIZ UDPGothic', sans-serif;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
 }
 
 .sidebar {
-    width: 200px;
+    width: 180px;
     background-color: #333;
     color: white;
     height: 100vh;
-    padding-top: 20px;
+    padding-top: 18px;
     position: fixed;
-    transition: width 0.3s ease, background-color 0.3s ease; /* サイズと背景色の変化をスムーズに */
+    transition: width 0.3s ease, background-color 0.3s ease;
 }
 
 .sidebar:hover {
-    width: 300px; /* ホバー時に幅を広げる */
-    background-color: rgba(51, 51, 51, 0.8); /* 半透明にする */
+    width: 270px;
+    background-color: rgba(51, 51, 51, 0.8);
 }
 
 .sidebar h2 {
-    padding-left: 10px; /* 左側にスペースを追加 */
-    font-family: 'GenWanMin2-SB', serif;
-    font-size: 35px;
+    padding-left: 9px;
+    font-family: 'Noto Sans JP', serif;
+    font-size: 31.5px;
+    font-weight: 300;
 }
 
 .sidebar ul {
     list-style-type: none;
-    padding: 5px 0;
+    padding: 4.5px 0;
 }
 
 .sidebar ul li {
-    padding: 10px 10px 20px;
+    padding: 9px 9px 18px;
 }
 
 .sidebar ul li a {
     color: white;
     text-decoration: none;
     display: block;
-    font-size: 20px;
-    transition: background-color 0.5s ease; /* 背景色の変化をスムーズに */
+    font-size: 18px;
+    transition: background-color 0.5s ease;
 }
 
 .sidebar ul li a:hover {
-    background-color: #575757;
+    background-color: #3e3e3ea1;
 }
 
 .main-content {
-    margin-left: 200px; /* サイドバーの幅と同じ */
-    width: calc(100% - 200px); /* サイドバーを除いた幅 */
-    min-height: 100vh; /* 最低でもビューポートの高さ */
-    padding-top: 20px; /* 上部に余白を追加 */
-    transition: margin-left 0.3s ease; /* サイドバーの変化に合わせてスムーズに移動 */
+    margin-left: 180px;
+    width: calc(100% - 180px);
+    min-height: 90vh;
+    padding-top: 18px;
+    transition: margin-left 0.3s ease;
 }
 
 .sidebar:hover ~ .main-content {
-    margin-left: 300px; /* サイドバーが広がったときのマージン */
+    margin-left: 270px;
 }
 
 header {
-    padding: 10px;
+    padding: 9px;
     text-align: left;
-    border-bottom: 2px solid #444444; /* 黒色の線 */
+    border-bottom: 1.8px solid #444444;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
 }
 
 header h1 {
-    font-size: 40px;
-    /* font-family: 'GenWanMin2-SB', serif; */
+    font-size: 36px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
 }
 
 .post-it {
     float: left;
-    margin-right: 20px; /* 右側にスペースを追加 */
-    width: 350px; /* 必要に応じてサイズを調整 */
+    margin-right: 18px;
+    width: 315px;
     height: auto;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-    background: #ffeb3b; /* 付箋のような背景色 */
-    padding: 10px;
-    transform: rotate(-5deg); /* 少し傾ける */
-    border: 1px solid #ccc; /* 薄い枠線 */
+    box-shadow: 4.5px 4.5px 13.5px rgba(0, 0, 0, 0.3);
+    background: #ffeb3b;
+    padding: 9px;
+    transform: rotate(-5deg);
+    border: 0.9px solid #ccc;
 }
 
 .content {
-    padding: 20px;
-    overflow: hidden; /* floatの影響を受けないようにする */
+    padding: 18px;
+    overflow: hidden;
 }
 
 .content p {
@@ -91,13 +96,14 @@ header h1 {
 }
 
 .content h2 {
-    font-size: 30px;
-    border-bottom: 2px solid #615e5ea9; /* 黒色の線 */
-    clear: both; /* floatの影響を受けないようにする */
+    font-size: 27px;
+    border-bottom: 1.8px solid #615e5ea9;
+    clear: both;
 }
 
 .content h3 {
     text-align: center;
+    font-size: 22.5px;
 }
 
 .content p {
@@ -105,25 +111,27 @@ header h1 {
 }
 
 .about-text {
-    text-align: left; /* 左寄せにする */
+    text-align: left;
 }
 
 .self-introduction {
-    text-align: left; /* 左寄せにする */
+    text-align: left;
 }
 
 .about-text p {
     text-align: left;
-    font-size: 22px;
-    font-family: 'GenWanMin2-SB', serif;
-    line-height: 1.2; /* 行間を調整 */
+    font-size: 19.8px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.08;
 }
 
 .about-text h3 {
     text-align: left;
-    font-size: 32px;
-    font-family: 'GenWanMin2-SB', serif;
-    line-height: 1.2; /* 行間を調整 */
+    font-size: 28.8px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.08;
 }
 
 .self-introduction p {
@@ -132,26 +140,77 @@ header h1 {
 
 .read-more {
     display: inline-block;
-    margin-top: 10px;
-    font-size: 16px;
+    margin-top: 9px;
+    font-size: 14.4px;
     color: #000;
     text-decoration: none;
-    position: relative; /* 相対位置を設定 */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 応答を鈍くする */
+    position: relative;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .read-more::before {
-    content: '＞'; /* 矢印を追加 */
-    font-size: 16px;
+    content: '＞';
+    font-size: 14.4px;
     color: #000;
-    margin-right: 5px; /* 矢印とテキストの間にスペースを追加 */
+    margin-right: 4.5px;
 }
 
 .read-more:hover {
-    background-color: yellow; /* ホバー時の背景色を黄色に */
+    background-color: yellow;
 }
 
 .read-more:active {
-    background-color: white; /* クリック時の背景色を白に */
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); /* 内向きの影を追加 */
+    background-color: white;
+    box-shadow: inset 0 0 4.5px rgba(0, 0, 0, 0.5);
+}
+
+.Skills h3 {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 315;
+    font-size: 22.5px;
+}
+
+.skill-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.skill {
+    background-color: #f4f4f4;
+    padding: 18px;
+    border-radius: 9px;
+    box-shadow: 0 3.6px 7.2px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill:hover {
+    transform: scale(1.1);
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.skill-container:hover .skill:not(:hover) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.skill h4 {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 450;
+    font-size: 21.6px;
+    margin-bottom: 9px;
+}
+
+.skill p {
+    font-size: 18px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+}
+
+.skill-image {
+    width: auto;
+    height: 90px;
+    margin-bottom: 9px;
 }

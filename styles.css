@@ -40,7 +40,7 @@ body {
     color: white;
     text-decoration: none;
     display: block;
-    font-size: 18px;
+    font-size: 22px;
     transition: background-color 0.5s ease;
 }
 
@@ -248,3 +248,72 @@ header h1 {
     flex: 1 1 200px; /* 各ツールの最小幅を200pxに設定 */
     box-sizing: border-box;
 }
+
+.timeline {
+    position: relative;
+    padding: 20px 0;
+    list-style: none;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #e9ecef;
+    left: 50%;
+    margin-left: -2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin: 20px 0;
+    padding-left: 50%;
+    clear: both;
+}
+
+.timeline-item:nth-child(odd) {
+    padding-left: 0;
+    padding-right: 50%;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    text-align: right;
+}
+
+.timeline-icon {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    background: #6c757d;
+    border-radius: 50%;
+    z-index: 1;
+    transition: background-color 0.3s ease;
+    border: 2px solid #6c757d; /* 黒い枠線を追加 */
+}
+
+.timeline-icon.hovered {
+    background: var(--random-color, #6c757d);
+}
+
+.timeline-content {
+    position: relative;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content h3 {
+    margin-top: 0;
+    font-size: 1.25em;
+}
+
+.timeline-content p {
+    margin: 0;
+}
+

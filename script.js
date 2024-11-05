@@ -21,3 +21,18 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('.star-rating 要素が見つかりません。');
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    timelineItems.forEach(item => {
+        const icon = item.querySelector('.timeline-icon');
+        item.addEventListener('mouseenter', () => {
+            if (!icon.classList.contains('hovered')) {
+                const randomColor = `hsl(${Math.random() * 360}, 100%, 85%)`;
+                icon.style.setProperty('--random-color', randomColor);
+                icon.classList.add('hovered');
+            }
+        });
+    });
+});

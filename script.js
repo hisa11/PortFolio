@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, {
             root: null,
             rootMargin: '0px',
-            threshold: 0.5 // 中央付近で発火
+            threshold: 0.5
         });
 
         starRatings.forEach(starRating => {

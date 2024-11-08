@@ -1,8 +1,12 @@
+/* フォントファミリーの統一 */
+* {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+}
+
 body {
     display: flex;
     margin: 0;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
 }
 
 .sidebar {
@@ -22,9 +26,7 @@ body {
 
 .sidebar h2 {
     padding-left: 9px;
-    font-family: 'Noto Sans JP', serif;
     font-size: 31.5px;
-    font-weight: 300;
 }
 
 .sidebar ul {
@@ -64,14 +66,10 @@ header {
     padding: 9px;
     text-align: left;
     border-bottom: 1.8px solid #444444;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
 }
 
 header h1 {
     font-size: 36px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
 }
 
 .post-it {
@@ -121,16 +119,12 @@ header h1 {
 .about-text p {
     text-align: left;
     font-size: 19.8px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
     line-height: 1.08;
 }
 
 .about-text h3 {
     text-align: left;
     font-size: 28.8px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
     line-height: 1.08;
 }
 
@@ -157,6 +151,7 @@ header h1 {
 
 .read-more:hover {
     background-color: yellow;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .read-more:active {
@@ -165,8 +160,6 @@ header h1 {
 }
 
 .Skills h3 {
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 315;
     font-size: 25px;
 }
 
@@ -197,7 +190,6 @@ header h1 {
 }
 
 .skill h4 {
-    font-family: 'Noto Sans JP', sans-serif;
     font-weight: 450;
     font-size: 21.6px;
     margin-bottom: 9px;
@@ -205,8 +197,6 @@ header h1 {
 
 .skill p {
     font-size: 18px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 300;
 }
 
 .skill-image {
@@ -227,93 +217,113 @@ header h1 {
     opacity: 1;
     transform: translateX(0);
 }
+
 .star-rating span {
-    font-size: 30px; /* 星を大きく */
-    color: gold; /* 金色に変更 */
-    margin: 0 5px; /* 星間にスペースを追加 */
+    font-size: 30px;
+    color: gold;
+    margin: 0 5px;
     transition: color 0.3s ease, transform 0.5s ease;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 影を追加して見やすく */
-    background: linear-gradient(45deg, #ffd700, #ffec8b); /* 金色のグラデーション */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color:
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .tools {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* ツール間のスペース */
+    gap: 20px;
 }
 
 .tools .skill {
-    flex: 1 1 200px; /* 各ツールの最小幅を200pxに設定 */
+    flex: 1 1 200px;
     box-sizing: border-box;
 }
 
-.timeline {
-    position: relative;
-    padding: 20px 0;
-    list-style: none;
+/* タイムラインのセクションスタイル */
+/* タイムラインのセクションスタイル */
+/* タイムラインのセクションスタイル */
+#Timeline {
+    padding: 36px 18px;
+    background-color: #f9f9f9;
+    margin: 36px 0;
 }
 
-.timeline:before {
+#Timeline h2 {
+    font-size: 27px;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+/* タイムライン全体のスタイル */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    position: relative;
+    padding-left: 60px;
+}
+
+.timeline::before {
     content: '';
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 4px;
-    background: #e9ecef;
-    left: 50%;
-    margin-left: -2px;
+    left: 36px;
+    width: 3px;
+    background-color: #615e5e;
 }
 
+/* 各タイムラインアイテム */
 .timeline-item {
+    display: flex;
+    align-items: flex-start;
     position: relative;
-    margin: 20px 0;
-    padding-left: 50%;
-    clear: both;
+    padding: 18px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 36px;
 }
 
-.timeline-item:nth-child(odd) {
-    padding-left: 0;
-    padding-right: 50%;
-}
-
-.timeline-item:nth-child(odd) .timeline-content {
-    text-align: right;
-}
-
-.timeline-icon {
+.timeline-item::before {
+    content: '●';
     position: absolute;
-    top: 0;
-    left: 50%;
-    width: 20px;
-    height: 20px;
-    margin-left: -10px;
-    background: #6c757d;
-    border-radius: 50%;
-    z-index: 1;
-    transition: background-color 0.3s ease;
-    border: 2px solid #6c757d; /* 黒い枠線を追加 */
+    left: -36px;
+    font-size: 18px;
+    color: #615e5e;
+    line-height: 1;
 }
 
-.timeline-icon.hovered {
-    background: var(--random-color, #6c757d);
+/* 日時部分のスタイル */
+.timeline-date {
+    width: 100px;
+    font-size: 18px;
+    color: #444;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 24px;
 }
 
+/* イベント内容部分のスタイル */
 .timeline-content {
-    position: relative;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 6px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-grow: 1;
 }
 
-.timeline-content h3 {
-    margin-top: 0;
-    font-size: 1.25em;
+.timeline-content h4 {
+    font-size: 21.6px;
+    margin-bottom: 9px;
+    color: #333;
 }
 
 .timeline-content p {
-    margin: 0;
+    font-size: 16.2px;
+    color: #555;
+    line-height: 1.6;
 }
 
+/* 画像部分のスタイル */
+.timeline-image {
+    margin-top: 9px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}

@@ -17,6 +17,8 @@ body {
     padding-top: 18px;
     position: fixed;
     transition: width 0.3s ease, background-color 0.3s ease;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    /* フォントファミリーの変更 */
 }
 
 .sidebar:hover {
@@ -27,6 +29,8 @@ body {
 .sidebar h2 {
     padding-left: 9px;
     font-size: 31.5px;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    /* フォントファミリーの変更 */
 }
 
 .sidebar ul {
@@ -43,6 +47,8 @@ body {
     text-decoration: none;
     display: block;
     font-size: 22px;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    /* フォントファミリーの変更 */
     transition: background-color 0.5s ease;
 }
 
@@ -58,7 +64,7 @@ body {
     transition: margin-left 0.3s ease;
 }
 
-.sidebar:hover ~ .main-content {
+.sidebar:hover~.main-content {
     margin-left: 270px;
 }
 
@@ -70,6 +76,8 @@ header {
 
 header h1 {
     font-size: 36px;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    /* フォントファミリーの変更 */
 }
 
 .post-it {
@@ -97,6 +105,9 @@ header h1 {
     font-size: 27px;
     border-bottom: 1.8px solid #615e5ea9;
     clear: both;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    /* フォントファミリーの変更 */
+
 }
 
 .content h3 {
@@ -258,7 +269,7 @@ header h1 {
     flex-direction: column;
     gap: 36px;
     position: relative;
-    padding-left: 60px;
+    padding-left: 45px;
 }
 
 .timeline::before {
@@ -266,7 +277,7 @@ header h1 {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 36px;
+    left: 52px;
     width: 3px;
     background-color: #615e5e;
 }
@@ -287,9 +298,23 @@ header h1 {
     content: '●';
     position: absolute;
     left: -36px;
+    top: 50%;
+    /* アイテムの中央に配置 */
+    transform: translateY(-50%);
+    /* アイテムの中央に配置 */
     font-size: 18px;
-    color: #615e5e;
+    color: #4d4b4b;
+    /* デフォルトの色 */
     line-height: 1;
+    transition: color 0.3s ease;
+    /* 色の変更にアニメーションを追加 */
+    transition-delay: 0.5s;
+    /* 遅延を追加 */
+}
+
+.timeline-item.scrolled::before {
+    color: #FFA07A;
+    /* 淡いオレンジ色 */
 }
 
 /* 日時部分のスタイル */
@@ -326,4 +351,25 @@ header h1 {
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content a {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: #007BFF;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.timeline-content a:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    background-color: #f18e472e;
+}
+
+.timeline-content a:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -4,6 +4,10 @@
     font-weight: 300;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     display: flex;
     margin: 0;
@@ -402,3 +406,30 @@ header h1 {
     bottom: -20px; /* 下端から少し下に配置 */
     transform: translateX(100%); /* 左端を他の要素の右端に合わせる */
 }
+
+#scrollToTopBtn {
+    opacity: 0; /* 透明度 */
+    position: fixed; /* 固定位置 */
+    bottom: 20px; /* 下から20px */
+    right: 30px; /* 右から30px */
+    z-index: 99; /* 他の要素より前に表示 */
+    border: none; /* ボーダーなし */
+    outline: none; /* アウトラインなし */
+    background-color: #9f9f9f; /* 背景色: 白 */
+    color: #000; /* 文字色: 黒 */
+    cursor: pointer; /* カーソル: ポインター */
+    padding: 15px; /* パディング */
+    border-radius: 10px; /* 角丸 */
+    font-size: 18px; /* フォントサイズ */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドー */
+    transition: opacity 0.2s ease-in-out, background-color 0.3s ease-in-out; /* トランジション */
+}
+
+#scrollToTopBtn.show {
+    opacity: 1; /* 透明度を1に */
+}
+
+#scrollToTopBtn:hover {
+    background-color: #d9d9d9; /* ホバー時の背景色 */
+}
+

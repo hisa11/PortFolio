@@ -40,6 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const timelineItems = document.querySelectorAll('.timeline-item');
 
+    timelineItems.forEach(item => {
+        const icon = item.querySelector('.timeline-icon');
+        item.addEventListener('mouseenter', () => {
+            if (!icon.classList.contains('hovered')) {
+                const randomColor = `hsl(${Math.random() * 360}, 100%, 85%)`;
+                icon.style.setProperty('--random-color', randomColor);
+                icon.classList.add('hovered');
+            }
+        });
+    });
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -54,5 +65,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     timelineItems.forEach(item => {
         observer.observe(item);
+    });
+
+    // スクロールイベントを監視
+    window.onscroll = function() {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            scrollToTopBtn.classList.add("show");
+        } else {
+            scrollToTopBtn.classList.remove("show");
+        }
+    }
+
+    // ボタンクリック時にページトップにスクロール
+    document.getElementById("scrollToTopBtn").addEventListener("click", function() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     });
 });

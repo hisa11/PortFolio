@@ -87,7 +87,7 @@ header h1 {
 .post-it {
     float: left;
     margin-right: 18px;
-    width: 315px;
+    width: 350px;
     height: auto;
     box-shadow: 4.5px 4.5px 13.5px rgba(0, 0, 0, 0.3);
     background: #ffeb3b;

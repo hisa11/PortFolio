@@ -1,3 +1,34 @@
+// document.addEventListener('DOMContentLoaded', () => {
+//     // 年齢を計算して表示する
+//     const birthDate = new Date(2008, 0, 11); // 誕生日 (月は0から始まるので1月は0)
+//     const today = new Date();
+//     let age = today.getFullYear() - birthDate.getFullYear();
+//     const monthDiff = today.getMonth() - birthDate.getMonth();
+//     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+//         age--;
+//     }
+//     document.getElementById('age').textContent = age;
+// });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 年齢を計算して表示する
+    const birthDate = new Date(2008, 0, 11); // 誕生日 (月は0から始まるので1月は0)
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    document.getElementById('age').textContent = age;
+
+    // Read moreリンクのクリックイベントを制御
+    const readMoreLink = document.querySelector('.read-more');
+    readMoreLink.addEventListener('click', (event) => {
+        event.preventDefault(); // ページ移動を中止
+        alert('準備中...');
+    });
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const starRatings = document.querySelectorAll('.star-rating');
 

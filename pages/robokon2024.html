@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <link rel="icon" href="../image/Icon 2.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortFolio | Masada Takahisa(大阪公大高専生)</title>
+    <link rel="stylesheet" href="robokon2024.css">
+    <script src="../script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Noto+Sans+JP:wght@300&display=swap"
+        rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.sidebar a');
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>PortFolio</h2>
+        <ul>
+            <li><a href="#Wataridori">#ワタリドリ</a></li>
+            <li><a href="#Kounotori">#コウノトリ</a></li>
+            <li><a href="#tubame">#ツバメ</a></li>
+            <li><a href="#kurotugumi">#クロツグミ</a></li>
+        </ul>
+        <div class="home-button">
+            <a href="#" onclick="navigateHome()">HOME</a>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>#Masasda Takahisa / 正田貴悠</h1>
+        </header>
+
+        <div class="content">
+            <div id="Wataridori" class="Wataridori">
+                <h2>#ワタリドリ</h2>
+                <p>高専ロボコン（正式名称：アイデア対決・全国高等専門学校
+                    ロボットコンテスト）とは「自らの手でロボットを作る」体験を通して発想することの大切さ・物作りの素晴らしさを共有する全国規模の教育イベントです。全国の高等専門学校の学生たちが、自らのアイデアと技術力を用いてロボットを製作します。毎年異なる競技課題を通じてその成果を競う、1988年から続く伝統ある競技大会です。
+                </p>
+                <br>
+                <p>高専ロボコン2024の競技課題は、『ロボたちの帰還』です。制限時間2分30秒の間に送り込まれたロボットでオブジェクトを回収し、帰還したときのオブジェクト点を競う競技です。</p>
+                <br>
+                <p>私は今年の高専ロボコンが初参加で、チームリーダー兼制御班として参加しました。チーム「ワタリドリ」は、機械班3人、回路班2人、制御班3人の8人チームでした。全国大会出場とはなりませんでしたが、たくさんの技術を学ぶことができたので、次回以降のロボコンに役立てると思います。
+                </p>
+            </div>
+            <div id="Kounotori" class="Kounotori">
+                <h2>#コウノトリ</h2>
+                <img src="./robokon2024_image/Kounotori.png" alt="コウノトリ" class="Kounotori-img">
+                <p>コウノトリは私たちのチームのロボット1です。</p>
+                <p>このロボットの役割としては、</p>
+                <ul>
+                    <li>ロボット2を発射する</li>
+                    <li>ロボット2から送られてきたボールを回収する</li>
+                </ul>
+                <p>という2つの役割があります。</p>
+                <p>私はこのロボットではAI部分のプログラムを担当しました</p>
+                <p>概要としては、ボールが空中に飛んでいる間にカメラで認識したボールの位置に合わせてロボットを動かすというものです。</p>
+                <img src="./robokon2024_image/ball-AI.png" alt="AI" class="AI-img">
+            </div>
+            <div id="tubame" class="tubame">
+                <h2>#ツバメ</h2>
+                <img src="./robokon2024_image/Tubame.png" alt="ツバメ" class="Tubame-img">
+                <p>ツバメは私たちのチームのロボット2の1つです。</p>
+                <p>このロボットは箱を回収し、自分自身ごと帰還する役割があります。</p>
+                <video src="./robokon2024_image/Tubame-jump.mp4" controls class="Tubame-video"></video>
+                <p>動画は帰還時のジャンプ機構</p>
+            </div>
+            <div id="kurotugumi" class="kurotugumi">
+                <h2>#クロツグミ</h2>
+                <img src="./robokon2024_image/Kurotugumi.png" alt="クロツグミ" class="Kurotugumi-img">
+                <p>クロツグミは私たちのチームのロボット3です。</p>
+                <p>このロボットはオブジェクトを回収し、帰還する役割があります。</p>
+                <video src="./robokon2024_image/Kurotugumi-kick.mp4" controls class="Kurotugumi-video"></video>
+                <p>動画はボールを送り届けるキック機構</p>
+            </div>
+        </div>
+    </div>
+    <button id="scrollToTopBtn" title="Go to top">↑</button>
+    <script>
+        function navigateHome() {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+
+</html>

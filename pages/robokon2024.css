@@ -1,0 +1,177 @@
+/* フォントファミリーの統一 */
+* {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    margin: 0;
+}
+
+.sidebar {
+    width: 180px;
+    background-color: #333;
+    color: white;
+    height: 100vh;
+    padding-top: 18px;
+    position: fixed;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    /* フォントファミリーの変更 */
+}
+
+.sidebar:hover {
+    width: 270px;
+    background-color: rgba(51, 51, 51, 0.8);
+}
+
+.sidebar h2 {
+    padding-left: 9px;
+    font-size: 31.5px;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    /* フォントファミリーの変更 */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 4.5px 0;
+}
+
+.sidebar ul li {
+    padding: 9px 9px 18px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-size: 22px;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    /* フォントファミリーの変更 */
+    transition: background-color 0.5s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: #3e3e3ea1;
+}
+
+.home-button {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.home-button a {
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.home-button a:hover {
+    background-color: #555;
+}
+
+.main-content {
+    margin-left: 180px;
+    width: calc(100% - 180px);
+    min-height: 90vh;
+    padding-top: 18px;
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar:hover~.main-content {
+    margin-left: 270px;
+}
+
+header {
+    padding: 9px;
+    text-align: left;
+    border-bottom: 1.8px solid #444444;
+}
+
+header h1 {
+    font-size: 36px;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    /* フォントファミリーの変更 */
+}
+
+.post-it {
+    float: left;
+    margin-right: 18px;
+    width: 350px;
+    height: auto;
+    box-shadow: 4.5px 4.5px 13.5px rgba(0, 0, 0, 0.3);
+    background: #ffeb3b;
+    padding: 9px;
+    transform: rotate(-5deg);
+    border: 0.9px solid #ccc;
+}
+
+.content {
+    padding: 18px;
+    overflow: hidden;
+}
+
+.content p {
+    text-align: left;
+}
+
+.content h2 {
+    font-size: 27px;
+    border-bottom: 1.8px solid #615e5ea9;
+    clear: both;
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+    /* フォントファミリーの変更 */
+
+}
+
+.content h3 {
+    text-align: center;
+    font-size: 22.5px;
+}
+
+.content img {
+    width: 30%;
+    height: auto;
+}
+
+.content video {
+    width: auto;
+    height: 400px;
+}
+#scrollToTopBtn {
+    opacity: 0; /* 透明度 */
+    position: fixed; /* 固定位置 */
+    bottom: 20px; /* 下から20px */
+    right: 30px; /* 右から30px */
+    z-index: 99; /* 他の要素より前に表示 */
+    border: none; /* ボーダーなし */
+    outline: none; /* アウトラインなし */
+    background-color: #333; /* 背景色 */
+    color: white; /* 文字色 */
+    cursor: pointer; /* カーソル: ポインター */
+    padding: 15px; /* パディング */
+    border-radius: 50%; /* 角丸 */
+    font-size: 18px; /* フォントサイズ */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドー */
+    transition: opacity 0.2s ease-in-out, background-color 0.3s ease-in-out; /* トランジション */
+}
+
+#scrollToTopBtn.show {
+    opacity: 1; /* 透明度を1に */
+}
+
+#scrollToTopBtn:hover {
+    background-color: #555; /* ホバー時の背景色 */
+}

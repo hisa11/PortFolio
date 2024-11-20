@@ -127,6 +127,30 @@ header h1 {
     text-align: left;
 }
 
+/* 既存のスタイルの下に追加 */
+.qualification-item {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+    gap: 2px; /* ギャップを最小限に */
+}
+
+.qualification-name {
+    flex: 2;
+    margin-right: 2px; /* 余白を最小限に */
+}
+
+.qualification-level {
+    flex: 1;
+    text-align: left;
+    margin-right: 2px; /* 余白を最小限に */
+}
+
+.qualification-date {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+}
 .self-introduction {
     text-align: left;
 }
@@ -145,33 +169,6 @@ header h1 {
 
 .self-introduction p {
     text-align: left;
-}
-
-.read-more {
-    display: inline-block;
-    margin-top: 9px;
-    font-size: 14.4px;
-    color: #000;
-    text-decoration: none;
-    position: relative;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.read-more::before {
-    content: '＞';
-    font-size: 14.4px;
-    color: #000;
-    margin-right: 4.5px;
-}
-
-.read-more:hover {
-    background-color: yellow;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.read-more:active {
-    background-color: white;
-    box-shadow: inset 0 0 4.5px rgba(0, 0, 0, 0.5);
 }
 
 .Skills h3 {

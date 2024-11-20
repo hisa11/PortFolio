@@ -60,28 +60,6 @@ body {
     background-color: #3e3e3ea1;
 }
 
-.home-button {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-}
-
-.home-button a {
-    font-family: "Edu AU VIC WA NT Pre", cursive;
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.home-button a:hover {
-    background-color: #555;
-}
-
 .main-content {
     margin-left: 180px;
     width: calc(100% - 180px);
@@ -124,7 +102,7 @@ header h1 {
 }
 
 .content p {
-    text-align: left;
+    text-align: right;
 }
 
 .content h2 {
@@ -133,7 +111,6 @@ header h1 {
     clear: both;
     font-family: "Edu AU VIC WA NT Pre", cursive;
     /* フォントファミリーの変更 */
-
 }
 
 .content h3 {
@@ -141,15 +118,292 @@ header h1 {
     font-size: 22.5px;
 }
 
-.content img {
-    width: 30%;
-    height: auto;
+.content p {
+    text-align: center;
 }
 
-.content video {
-    width: auto;
-    height: 400px;
+.about-text {
+    text-align: left;
 }
+
+.self-introduction {
+    text-align: left;
+}
+
+.about-text p {
+    text-align: left;
+    font-size: 19.8px;
+    line-height: 1.08;
+}
+
+.about-text h3 {
+    text-align: left;
+    font-size: 28.8px;
+    line-height: 1.08;
+}
+
+.self-introduction p {
+    text-align: left;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 9px;
+    font-size: 14.4px;
+    color: #000;
+    text-decoration: none;
+    position: relative;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.read-more::before {
+    content: '＞';
+    font-size: 14.4px;
+    color: #000;
+    margin-right: 4.5px;
+}
+
+.read-more:hover {
+    background-color: yellow;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.read-more:active {
+    background-color: white;
+    box-shadow: inset 0 0 4.5px rgba(0, 0, 0, 0.5);
+}
+
+.Skills h3 {
+    font-size: 25px;
+}
+
+.skill-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.skill {
+    background-color: #f4f4f4;
+    padding: 18px;
+    border-radius: 9px;
+    box-shadow: 0 3.6px 7.2px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill:hover {
+    transform: scale(1.1);
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.skill-container:hover .skill:not(:hover) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.skill h4 {
+    font-weight: 450;
+    font-size: 21.6px;
+    margin-bottom: 9px;
+}
+
+.skill p {
+    font-size: 18px;
+}
+
+.skill-image {
+    width: auto;
+    height: 90px;
+    margin-bottom: 9px;
+}
+
+.star-rating {
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.star-rating.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.star-rating span {
+    font-size: 30px;
+    color: gold;
+    margin: 0 5px;
+    transition: color 0.3s ease, transform 0.5s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.tools .skill {
+    flex: 1 1 200px;
+    box-sizing: border-box;
+}
+
+/* タイムラインのセクションスタイル */
+#Timeline {
+    padding: 36px 18px;
+    background-color: #f9f9f9;
+    margin: 36px 0;
+}
+
+#Timeline h2 {
+    font-size: 27px;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+/* タイムライン全体のスタイル */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    position: relative;
+    padding-left: 45px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 52px;
+    width: 3px;
+    background-color: #615e5e;
+}
+
+/* 各タイムラインアイテム */
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    padding: 18px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-left: 36px;
+}
+
+.timeline-item::before {
+    content: '●';
+    position: absolute;
+    left: -36px;
+    top: 50%;
+    /* アイテムの中央に配置 */
+    transform: translateY(-50%);
+    /* アイテムの中央に配置 */
+    font-size: 18px;
+    color: #4d4b4b;
+    /* デフォルトの色 */
+    line-height: 1;
+    transition: color 0.3s ease;
+    /* 色の変更にアニメーションを追加 */
+    transition-delay: 0.5s;
+    /* 遅延を追加 */
+}
+
+.timeline-item.scrolled::before {
+    color: #FFA07A;
+    /* 淡いオレンジ色 */
+}
+
+/* 日時部分のスタイル */
+.timeline-date {
+    width: 100px;
+    font-size: 18px;
+    color: #444;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 24px;
+}
+
+/* イベント内容部分のスタイル */
+.timeline-content {
+    text-align: center;
+    position: relative;
+}
+
+.timeline-content h4 {
+    font-size: 21.6px;
+    margin-bottom: 9px;
+    color: #333;
+}
+
+.timeline-content p {
+    font-size: 16.2px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* 画像部分のスタイル */
+.timeline-image {
+    margin-top: 9px;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: block;
+    margin: 0 auto;
+    width: auto; 
+    height: 500px; 
+}
+
+.timeline-content a {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    text-decoration: none;
+    color: #007BFF;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.timeline-content a:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+    background-color: #f18e472e;
+}
+
+.timeline-content a:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-image {
+    width: auto; /* 画像の幅を150pxに設定 */
+    height: 500px; /* アスペクト比を維持 */
+}
+
+.timeline-item h4{
+    font-weight: 900;
+    font-size: 25px;
+    text-align: left;
+}
+
+.timeline-item p{
+    text-align: left;
+    font-size: large;
+    font-weight: 700;
+}
+
+.timeline-link {
+    position: absolute;
+    right: -10px; /* 右端から少し右に配置 */
+    bottom: -20px; /* 下端から少し下に配置 */
+    transform: translateX(100%); /* 左端を他の要素の右端に合わせる */
+}
+
 #scrollToTopBtn {
     opacity: 0; /* 透明度 */
     position: fixed; /* 固定位置 */
@@ -158,8 +412,8 @@ header h1 {
     z-index: 99; /* 他の要素より前に表示 */
     border: none; /* ボーダーなし */
     outline: none; /* アウトラインなし */
-    background-color: #9f9f9f; /* 背景色 */
-    color: #000; /* 文字色 */
+    background-color: #9f9f9f; /* 背景色: 白 */
+    color: #000; /* 文字色: 黒 */
     cursor: pointer; /* カーソル: ポインター */
     padding: 15px; /* パディング */
     border-radius: 10px; /* 角丸 */
@@ -174,4 +428,112 @@ header h1 {
 
 #scrollToTopBtn:hover {
     background-color: #d9d9d9; /* ホバー時の背景色 */
+}
+
+.contact img {
+    width: 5%;
+    height: auto;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes press {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes flyAway {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-1000px);
+        opacity: 0;
+    }
+}
+
+.contact img {
+    width: 5%;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.contact img:hover {
+    animation: bounce 2s infinite;
+}
+
+/* メディアクエリでスマホ表示に対応 */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .sidebar ul {
+        display: none;
+    }
+
+    .sidebar.active ul {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .sidebar:hover~.main-content {
+        margin-left: 0;
+    }
+
+    .hamburger {
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        background-color: #333;
+        color: white;
+        text-align: center;
+    }
+
+    .hamburger:hover {
+        background-color: #555;
+    }
+
+    .sidebar h2 {
+        display: inline-block;
+        margin: 0;
+        padding: 10px;
+    }
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+}
+
+.about-container img {
+    margin-right: 18px;
+}
+
+.about-container .about-text {
+    flex: 1;
 }

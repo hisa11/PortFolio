@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <link rel="icon" href=".././image/Icon 2.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortFolio | Masada Takahisa(大阪公大高専生)</title>
+    <link rel="stylesheet" href="readmore.css">
+    <script src="../../script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Noto+Sans+JP:wght@300&display=swap"
+        rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.sidebar a');
+            links.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>PortFolio</h2>
+        <ul>
+            <li><a href="#About">#About...</a></li>
+            <li><a href="#Qualification">#Qualification</a></li>
+        </ul>
+        <div class="home-button">
+            <a href="#" onclick="navigateHome()">HOME</a>
+        </div>
+    </div>
+    <div class="content">
+        <header>
+            <h1>#Masada Takahisa / 正田 貴悠</h1>
+        </header>
+        <div class="content">
+            <section id="About...">
+                <h2>#About...</h2>
+                <img src="./image/Icon.png" alt="About Image" class="post-it">
+                <div class="about-text">
+                    <p>はじめまして。ポートフォリオの閲覧ありがとうございます。</p>
+                    <p>私のことを少しでも知っていただければ幸いです。</p>
+                    <br>
+                    <h3>自己紹介</h3>
+                    <div class="self-introduction">
+                        <p>Name: 正田 貴悠 / Masada Takahisa</p>
+                        <p>Birthday: 2008-1-11</p>
+                        <p>Age: <span id="age"></span>years old</p>
+                        <p>School: 大阪公立大学工業高等専門学校(大阪公大高専)</p>
+                        <p>Club: ロボット倶楽部 制御班</p>
+                        <a href="./self-introduction" class="read-more">Read more...</a>
+                    </div>
+                </div>
+            </section>
+    </div>
+</body>

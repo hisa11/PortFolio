@@ -158,11 +158,11 @@ header h1 {
     z-index: 99; /* 他の要素より前に表示 */
     border: none; /* ボーダーなし */
     outline: none; /* アウトラインなし */
-    background-color: #333; /* 背景色 */
-    color: white; /* 文字色 */
+    background-color: #9f9f9f; /* 背景色 */
+    color: #000; /* 文字色 */
     cursor: pointer; /* カーソル: ポインター */
     padding: 15px; /* パディング */
-    border-radius: 50%; /* 角丸 */
+    border-radius: 10px; /* 角丸 */
     font-size: 18px; /* フォントサイズ */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドー */
     transition: opacity 0.2s ease-in-out, background-color 0.3s ease-in-out; /* トランジション */
@@ -173,5 +173,5 @@ header h1 {
 }
 
 #scrollToTopBtn:hover {
-    background-color: #555; /* ホバー時の背景色 */
+    background-color: #d9d9d9; /* ホバー時の背景色 */
 }

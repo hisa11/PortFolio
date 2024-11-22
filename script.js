@@ -118,3 +118,23 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ハンバーガーメニューのクリックイベント
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarLinks = document.querySelectorAll('.sidebar ul li a');
+
+    hamburgerMenu.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+        hamburgerMenu.classList.toggle('open');
+    });
+
+    // サイドバーのリンクをクリックしたときにメニューを閉じる
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            hamburgerMenu.classList.remove('open');
+        });
+    });
+});

@@ -22,7 +22,7 @@ body {
     position: fixed;
     transition: width 0.3s ease, background-color 0.3s ease;
     font-family: "Edu AU VIC WA NT Pre", cursive;
-    /* フォントファミリーの変更 */
+    z-index: 101; /* 最前面に表示するためのz-index */
 }
 
 .sidebar:hover {
@@ -34,7 +34,6 @@ body {
     padding-left: 9px;
     font-size: 31.5px;
     font-family: "Edu AU VIC WA NT Pre", cursive;
-    /* フォントファミリーの変更 */
 }
 
 .sidebar ul {
@@ -52,7 +51,6 @@ body {
     display: block;
     font-size: 22px;
     font-family: "Edu AU VIC WA NT Pre", cursive;
-    /* フォントファミリーの変更 */
     transition: background-color 0.5s ease;
 }
 
@@ -72,6 +70,54 @@ body {
     margin-left: 270px;
 }
 
+/* ハンバーガーメニューのスタイル */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 102; /* サイドバーよりも前面に表示するためのz-index */
+    cursor: pointer;
+}
+
+.hamburger-menu .bar {
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.open .bar {
+    background-color: white;
+}
+
+/* サイドバーのレスポンシブデザイン */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 0;
+        overflow: hidden;
+        transition: width 0.3s ease;
+    }
+
+    .sidebar.open {
+        width: 180px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+}
+
 header {
     padding: 9px;
     text-align: left;
@@ -81,7 +127,6 @@ header {
 header h1 {
     font-size: 36px;
     font-family: "Edu AU VIC WA NT Pre", cursive;
-    /* フォントファミリーの変更 */
 }
 
 .post-it {
@@ -110,8 +155,6 @@ header h1 {
     border-bottom: 1.8px solid #615e5ea9;
     clear: both;
     font-family: "Edu AU VIC WA NT Pre", cursive;
-    /* フォントファミリーの変更 */
-
 }
 
 .content h3 {
@@ -127,23 +170,22 @@ header h1 {
     text-align: left;
 }
 
-/* 既存のスタイルの下に追加 */
 .qualification-item {
     display: flex;
     justify-content: flex-start;
     margin-bottom: 5px;
-    gap: 2px; /* ギャップを最小限に */
+    gap: 2px;
 }
 
 .qualification-name {
     flex: 2;
-    margin-right: 2px; /* 余白を最小限に */
+    margin-right: 2px;
 }
 
 .qualification-level {
     flex: 1;
     text-align: left;
-    margin-right: 2px; /* 余白を最小限に */
+    margin-right: 2px;
 }
 
 .qualification-date {
@@ -151,6 +193,7 @@ header h1 {
     text-align: left;
     white-space: nowrap;
 }
+
 .self-introduction {
     text-align: left;
 }
@@ -250,8 +293,6 @@ header h1 {
 }
 
 /* タイムラインのセクションスタイル */
-/* タイムラインのセクションスタイル */
-/* タイムラインのセクションスタイル */
 #Timeline {
     padding: 36px 18px;
     background-color: #f9f9f9;
@@ -264,7 +305,6 @@ header h1 {
     text-align: center;
 }
 
-/* タイムライン全体のスタイル */
 .timeline {
     display: flex;
     flex-direction: column;
@@ -283,7 +323,6 @@ header h1 {
     background-color: #615e5e;
 }
 
-/* 各タイムラインアイテム */
 .timeline-item {
     display: flex;
     align-items: flex-start;
@@ -300,25 +339,18 @@ header h1 {
     position: absolute;
     left: -36px;
     top: 50%;
-    /* アイテムの中央に配置 */
     transform: translateY(-50%);
-    /* アイテムの中央に配置 */
     font-size: 18px;
     color: #4d4b4b;
-    /* デフォルトの色 */
     line-height: 1;
     transition: color 0.3s ease;
-    /* 色の変更にアニメーションを追加 */
     transition-delay: 0.5s;
-    /* 遅延を追加 */
 }
 
 .timeline-item.scrolled::before {
     color: #FFA07A;
-    /* 淡いオレンジ色 */
 }
 
-/* 日時部分のスタイル */
 .timeline-date {
     width: 100px;
     font-size: 18px;
@@ -328,7 +360,6 @@ header h1 {
     margin-right: 24px;
 }
 
-/* イベント内容部分のスタイル */
 .timeline-content {
     text-align: center;
     position: relative;
@@ -346,7 +377,6 @@ header h1 {
     line-height: 1.6;
 }
 
-/* 画像部分のスタイル */
 .timeline-image {
     margin-top: 9px;
     max-width: 100%;
@@ -354,8 +384,8 @@ header h1 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: block;
     margin: 0 auto;
-    width: auto; 
-    height: 500px; 
+    width: auto;
+    height: 500px;
 }
 
 .timeline-content a {
@@ -380,18 +410,13 @@ header h1 {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.timeline-image {
-    width: auto; /* 画像の幅を150pxに設定 */
-    height: 500px; /* アスペクト比を維持 */
-}
-
-.timeline-item h4{
+.timeline-item h4 {
     font-weight: 900;
     font-size: 25px;
     text-align: left;
 }
 
-.timeline-item p{
+.timeline-item p {
     text-align: left;
     font-size: large;
     font-weight: 700;
@@ -399,35 +424,35 @@ header h1 {
 
 .timeline-link {
     position: absolute;
-    right: -10px; /* 右端から少し右に配置 */
-    bottom: -20px; /* 下端から少し下に配置 */
-    transform: translateX(100%); /* 左端を他の要素の右端に合わせる */
+    right: -10px;
+    bottom: -20px;
+    transform: translateX(100%);
 }
 
 #scrollToTopBtn {
-    opacity: 0; /* 透明度 */
-    position: fixed; /* 固定位置 */
-    bottom: 20px; /* 下から20px */
-    right: 30px; /* 右から30px */
-    z-index: 99; /* 他の要素より前に表示 */
-    border: none; /* ボーダーなし */
-    outline: none; /* アウトラインなし */
-    background-color: #9f9f9f; /* 背景色: 白 */
-    color: #000; /* 文字色: 黒 */
-    cursor: pointer; /* カーソル: ポインター */
-    padding: 15px; /* パディング */
-    border-radius: 10px; /* 角丸 */
-    font-size: 18px; /* フォントサイズ */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドー */
-    transition: opacity 0.2s ease-in-out, background-color 0.3s ease-in-out; /* トランジション */
+    opacity: 0;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #9f9f9f;
+    color: #000;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.2s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 #scrollToTopBtn.show {
-    opacity: 1; /* 透明度を1に */
+    opacity: 1;
 }
 
 #scrollToTopBtn:hover {
-    background-color: #d9d9d9; /* ホバー時の背景色 */
+    background-color: #d9d9d9;
 }
 
 .contact img {
@@ -479,4 +504,3 @@ header h1 {
 .contact img:hover {
     animation: bounce 2s infinite;
 }
-

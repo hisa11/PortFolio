@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
 document.addEventListener('DOMContentLoaded', () => {
     // ハンバーガーメニューのクリックイベント
     const hamburgerMenu = document.querySelector('.hamburger-menu');
@@ -137,4 +138,19 @@ document.addEventListener('DOMContentLoaded', () => {
             hamburgerMenu.classList.remove('open');
         });
     });
+
+    // デバイスの入力方法を検出
+    function detectInputMethod() {
+        if (window.matchMedia("(pointer: coarse)").matches) {
+            document.body.classList.add('touch-input');
+        } else {
+            document.body.classList.remove('touch-input');
+        }
+    }
+
+    // 初期検出
+    detectInputMethod();
+
+    // ウィンドウのリサイズ時に再検出
+    window.addEventListener('resize', detectInputMethod);
 });

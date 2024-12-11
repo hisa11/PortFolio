@@ -22,19 +22,38 @@ body {
     position: fixed;
     transition: width 0.3s ease, background-color 0.3s ease;
     font-family: "Edu AU VIC WA NT Pre", cursive;
-    /* フォントファミリーの変更 */
+    z-index: 101;
+    /* 最前面に表示するためのz-index */
 }
 
-.sidebar:hover {
-    width: 270px;
-    background-color: rgba(51, 51, 51, 0.8);
+/* サイドバーのホバーエフェクト */
+@media (min-width: 1100px) {
+    .sidebar:hover {
+        width: 270px;
+        background-color: rgba(51, 51, 51, 0.8);
+    }
+    .main-content{
+        margin-left: 180px;
+    }
+    .sidebar:hover~.main-content {
+        margin-left: 270px;
+    }
+    
+}
+/* タッチ入力の場合にサイドバーのホバーエフェクトを無効にする */
+.touch-input .sidebar:hover {
+    width: 180px;
+    background-color: #333;
+}
+
+.touch-input .sidebar:hover~.main-content {
+    margin-left: 180px;
 }
 
 .sidebar h2 {
     padding-left: 9px;
     font-size: 31.5px;
     font-family: "Edu AU VIC WA NT Pre", cursive;
-    /* フォントファミリーの変更 */
 }
 
 .sidebar ul {
@@ -52,7 +71,6 @@ body {
     display: block;
     font-size: 22px;
     font-family: "Edu AU VIC WA NT Pre", cursive;
-    /* フォントファミリーの変更 */
     transition: background-color 0.5s ease;
 }
 
@@ -82,16 +100,59 @@ body {
     background-color: #555;
 }
 
-.main-content {
-    margin-left: 180px;
-    width: calc(100% - 180px);
-    min-height: 90vh;
-    padding-top: 18px;
-    transition: margin-left 0.3s ease;
-}
+/* サイドバーのレスポンシブデザイン */
+@media (max-width: 1100px) {
 
-.sidebar:hover~.main-content {
-    margin-left: 270px;
+    /* ハンバーガーメニューのスタイル */
+    .hamburger-menu {
+        display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 30px;
+        position: fixed;
+        top: 18px;
+        left: 18px;
+        z-index: 102;
+        cursor: pointer;
+    }
+
+    .hamburger-menu .bar {
+        width: 100%;
+        height: 3px;
+        background-color: black;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    .hamburger-menu.open .bar {
+        background-color: white;
+    }
+
+    .sidebar {
+        width: 0;
+        overflow: hidden;
+        transition: width 0.3s ease;
+    }
+
+    .sidebar.open {
+        width: 180px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    /* ハンバーガーメニューが表示されているときにサイドバーのホバーエフェクトを無効にする */
+    .hamburger-menu.open~.sidebar:hover {
+        width: 180px;
+        background-color: #333;
+    }
 }
 
 header {
@@ -103,7 +164,6 @@ header {
 header h1 {
     font-size: 36px;
     font-family: "Edu AU VIC WA NT Pre", cursive;
-    /* フォントファミリーの変更 */
 }
 
 .post-it {
@@ -132,8 +192,6 @@ header h1 {
     border-bottom: 1.8px solid #615e5ea9;
     clear: both;
     font-family: "Edu AU VIC WA NT Pre", cursive;
-    /* フォントファミリーの変更 */
-
 }
 
 .content h3 {
@@ -141,37 +199,76 @@ header h1 {
     font-size: 22.5px;
 }
 
-.content img {
-    width: 30%;
-    height: auto;
+@media (min-width: 1100px) {
+    .content img {
+        width: 30%;
+        height: auto;
+    }
 }
 
-.content video {
-    width: auto;
-    height: 400px;
+@media (max-width: 1100px) {
+    .content img {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+    }
 }
+
+
+@media (min-width: 1100px) {
+    .content video {
+        width: auto;
+        height: 400px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .content video {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+    }
+}
+
 #scrollToTopBtn {
-    opacity: 0; /* 透明度 */
-    position: fixed; /* 固定位置 */
-    bottom: 20px; /* 下から20px */
-    right: 30px; /* 右から30px */
-    z-index: 99; /* 他の要素より前に表示 */
-    border: none; /* ボーダーなし */
-    outline: none; /* アウトラインなし */
-    background-color: #9f9f9f; /* 背景色 */
-    color: #000; /* 文字色 */
-    cursor: pointer; /* カーソル: ポインター */
-    padding: 15px; /* パディング */
-    border-radius: 10px; /* 角丸 */
-    font-size: 18px; /* フォントサイズ */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* シャドー */
-    transition: opacity 0.2s ease-in-out, background-color 0.3s ease-in-out; /* トランジション */
+    opacity: 0;
+    /* 透明度 */
+    position: fixed;
+    /* 固定位置 */
+    bottom: 20px;
+    /* 下から20px */
+    right: 30px;
+    /* 右から30px */
+    z-index: 99;
+    /* 他の要素より前に表示 */
+    border: none;
+    /* ボーダーなし */
+    outline: none;
+    /* アウトラインなし */
+    background-color: #9f9f9f;
+    /* 背景色 */
+    color: #000;
+    /* 文字色 */
+    cursor: pointer;
+    /* カーソル: ポインター */
+    padding: 15px;
+    /* パディング */
+    border-radius: 10px;
+    /* 角丸 */
+    font-size: 18px;
+    /* フォントサイズ */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* シャドー */
+    transition: opacity 0.2s ease-in-out, background-color 0.3s ease-in-out;
+    /* トランジション */
 }
 
 #scrollToTopBtn.show {
-    opacity: 1; /* 透明度を1に */
+    opacity: 1;
+    /* 透明度を1に */
 }
 
 #scrollToTopBtn:hover {
-    background-color: #d9d9d9; /* ホバー時の背景色 */
+    background-color: #d9d9d9;
+    /* ホバー時の背景色 */
 }

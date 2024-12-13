@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <link rel="icon" href="../../image/Icon 2.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PortFolio | Masada Takahisa(大阪公大高専生)</title>
+    <link rel="stylesheet" href="./card.css">
+    <script src="./card.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Noto+Sans+JP:wght@300&display=swap"
+        rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('.sidebar a');
+            links.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>PortFolio</h2>
+        <ul>
+            <li><a href="card">#Card</a></li>
+        </ul>
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div class="home-button">
+            <a href="#" onclick="navigateHome()">HOME</a>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1>#Masasda Takahisa / 正田貴悠</h1>
+        </header>
+        <div class="content">
+            <section id="card">
+
+                <div id="card" class="card">
+                    <h2>#Card</h2>
+                    <img src="./card/card_1.PNG" alt="名刺" class="card">
+                    <img src="./card/card_2.PNG" alt="名刺" class="card">
+                    <a href="./card/card.pdf" class="card_pdf" target="_blank">PDFで閲覧 </a>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script>
+        function navigateHome() {
+            window.location.href = '../../index.html';
+        }
+    </script>
+</body>

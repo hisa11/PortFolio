@@ -54,9 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // タッチ入力デバイスの場合にクラスを追加
+    if ('ontouchstart' in window || navigator.maxTouchPoints) {
+        document.body.classList.add('touch-input');
+    }
+
     // スクロールイベントを監視
     window.onscroll = function () {
         scrollFunction();
+        animateStars();
     };
 
     function scrollFunction() {
@@ -68,9 +74,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function animateStars() {
+        const starRatings = document.querySelectorAll('.star-rating');
+        starRatings.forEach(starRating => {
+            const rect = starRating.getBoundingClientRect();
+            if (rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)) {
+                starRating.classList.add('visible');
+            }
+        });
+    }
+
     // ボタンクリック時にページトップにスクロール
     document.getElementById("scrollToTopBtn").addEventListener("click", function () {
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     });
+
+    // 初回ロード時にアニメーションを適用
+    animateStars();
 });

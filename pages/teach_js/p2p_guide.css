@@ -259,7 +259,7 @@ li {
 
 /* デモセクション */
 .demo-container {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
     border-radius: 8px;
     padding: 27px;
     margin: 18px 0;
@@ -864,7 +864,7 @@ button:active {
 }
 
 .code-block code {
-    color: #61dafb;
+    color: #000000;
     word-break: normal;
 }
 
@@ -1095,4 +1095,117 @@ button:active {
 
 .connecting {
     animation: pulse 1s infinite;
+}
+
+/* シンタックスハイライト */
+.syntax-highlight .keyword {
+    color: #0066cc; /* 青色: const, let, function, if, return */
+    font-weight: 600;
+}
+
+.syntax-highlight .string {
+    color: #cc0000; /* 赤色: 文字列 */
+}
+
+.syntax-highlight .comment {
+    color: #008800; /* 緑色: コメント */
+    font-style: italic;
+}
+
+.syntax-highlight .function {
+    color: #cc6600; /* オレンジ色: 関数名 */
+    font-weight: 600;
+}
+
+.syntax-highlight .method {
+    color: #cc6600; /* オレンジ色: メソッド名 */
+}
+
+.syntax-highlight .variable {
+    color: #000000; /* 黒色: 変数名 */
+}
+
+.syntax-highlight .parameter {
+    color: #666666; /* グレー: パラメータ */
+}
+
+.syntax-highlight .property {
+    color: #000000; /* 黒色: プロパティ */
+}
+
+.syntax-highlight .tag {
+    color: #0066cc; /* 青色: HTMLタグ */
+    font-weight: 600;
+}
+
+.syntax-highlight .attribute {
+    color: #cc6600; /* オレンジ色: HTML属性 */
+}
+
+.syntax-highlight .null {
+    color: #2196F3; /* 青色: null, undefined */
+    font-weight: 600;
+}
+
+/* 詳細説明セクション */
+.detailed-explanation {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #31aae2;
+}
+
+.detailed-explanation h4 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.explanation-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.explanation-section h5 {
+    color: #31aae2;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 5px;
+}
+
+.explanation-section ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.explanation-section li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.usage-note {
+    background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+    color: #333;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+}
+
+.usage-note h5 {
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.usage-note p {
+    margin: 0;
+    line-height: 1.5;
+    color: #333;
 }

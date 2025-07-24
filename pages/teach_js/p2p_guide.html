@@ -178,68 +178,330 @@
                 <h2>#JavaScriptコードの解説</h2>
                 <div class="code-explanation">
                     <div class="code-section">
-                        <h3>🚀 初期化部分</h3>
-                        <div class="code-block">
-                            <pre><code>const peer = new Peer();
-const connections = new Map();
-let myPeerId = null;</code></pre>
-                        </div>
-                        <p><strong>解説：</strong>P2P通信の土台を準備するコードです。各変数が重要な役割を担います。</p>
-                        <ul>
-                            <li><code>const peer = new Peer();</code>:
-                                PeerJSライブラリの心臓部である<code>Peer</code>オブジェクトを生成します。これがシグナリングサーバーとの通信や、他のピアとの接続管理を行います。</li>
-                            <li><code>const connections = new Map();</code>:
-                                接続が確立された相手の情報を管理するための<code>Map</code>オブジェクトです。キーに相手のID、値に接続オブジェクトを保存し、複数の相手との通信を可能にします。
-                            </li>
-                            <li><code>let myPeerId = null;</code>:
-                                PeerJSサーバーから割り当てられる自分自身のユニークなIDを格納するための変数です。接続時にこのIDが他のピアに通知されます。</li>
-                        </ul>
-                    </div>
-
-                    <div class="code-section">
-                        <h3>🔗 接続処理</h3>
-                        <div class="code-block">
-                            <pre><code>function connect() {
-    const targetId = document.getElementById('target-id').value;
-    if (!targetId || targetId === myPeerId) return;
-    const conn = peer.connect(targetId);
-    setupConnection(conn);
-}</code></pre>
-                        </div>
-                        <p><strong>解説：</strong>「接続」ボタンが押されたときに、指定された相手にP2P接続を開始する関数です。</p>
-                        <ul>
-                            <li><code>const targetId = ...</code>: HTMLの入力欄から、接続したい相手のIDを取得します。</li>
-                            <li><code>if (!targetId || ...)</code>: IDが入力されていない、または自分のIDと同じ場合は、処理を中断します。</li>
-                            <li><code>const conn = peer.connect(targetId);</code>:
-                                <code>peer</code>オブジェクトの<code>connect</code>メソッドを使い、相手のIDに対してデータ接続を開始します。これにより接続オブジェクト<code>conn</code>が返されます。
-                            </li>
-                            <li><code>setupConnection(conn);</code>:
-                                生成された接続オブジェクトに対して、データ受信時や接続完了時などのイベントハンドラを設定する別の関数を呼び出します。</li>
-                        </ul>
-                    </div>
-
-                    <div class="code-section">
-                        <h3>📨 メッセージ送信</h3>
-                        <div class="code-block">
-                            <pre><code>function send() {
-    const msg = document.getElementById('msg').value;
-    const data = { type: 'text', text: msg, senderId: myPeerId };
+                        <h3>💻 通信できる最低限の完全なコード</h3>
+                        <div class="code-block syntax-highlight">
+                            <pre><code><span class="comment">// HTML部分</span>
+<span class="tag">&lt;!DOCTYPE</span> <span class="attribute">html</span><span class="tag">&gt;</span>
+<span class="tag">&lt;html</span> <span class="attribute">lang</span>=<span class="string">"ja"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attribute">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>P2P通信テスト<span class="tag">&lt;/title&gt;</span>
+    <span class="tag">&lt;script</span> <span class="attribute">src</span>=<span class="string">"https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>P2P通信テスト<span class="tag">&lt;/h1&gt;</span>
     
-    for (const conn of connections.values()) {
-        if (conn.open) conn.send(data);
+    <span class="tag">&lt;div&gt;</span>
+        <span class="tag">&lt;label&gt;</span>あなたのID:<span class="tag">&lt;/label&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attribute">type</span>=<span class="string">"text"</span> <span class="attribute">id</span>=<span class="string">"my-id"</span> <span class="attribute">readonly</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    
+    <span class="tag">&lt;div&gt;</span>
+        <span class="tag">&lt;label&gt;</span>相手のID:<span class="tag">&lt;/label&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attribute">type</span>=<span class="string">"text"</span> <span class="attribute">id</span>=<span class="string">"target-id"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;button</span> <span class="attribute">onclick</span>=<span class="string">"connect()"</span><span class="tag">&gt;</span>接続<span class="tag">&lt;/button&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    
+    <span class="tag">&lt;div&gt;</span>
+        <span class="tag">&lt;label&gt;</span>メッセージ:<span class="tag">&lt;/label&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attribute">type</span>=<span class="string">"text"</span> <span class="attribute">id</span>=<span class="string">"message"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;button</span> <span class="attribute">onclick</span>=<span class="string">"sendMessage()"</span><span class="tag">&gt;</span>送信<span class="tag">&lt;/button&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    
+    <span class="tag">&lt;div</span> <span class="attribute">id</span>=<span class="string">"messages"</span><span class="tag">&gt;&lt;/div&gt;</span>
+
+    <span class="tag">&lt;script&gt;</span>
+<span class="comment">// JavaScript部分</span>
+<span class="keyword">const</span> <span class="variable">peer</span> = <span class="keyword">new</span> <span class="function">Peer</span>();
+<span class="keyword">let</span> <span class="variable">connection</span> = <span class="null">null</span>;
+
+<span class="comment">// 自分のIDが発行されたときの処理</span>
+<span class="variable">peer</span>.<span class="method">on</span>(<span class="string">'open'</span>, <span class="keyword">function</span>(<span class="parameter">id</span>) {
+    <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'my-id'</span>).<span class="property">value</span> = <span class="parameter">id</span>;
+    <span class="function">log</span>(<span class="string">'あなたのID: '</span> + <span class="parameter">id</span>);
+});
+
+<span class="comment">// 相手から接続要求があったときの処理</span>
+<span class="variable">peer</span>.<span class="method">on</span>(<span class="string">'connection'</span>, <span class="keyword">function</span>(<span class="parameter">conn</span>) {
+    <span class="variable">connection</span> = <span class="parameter">conn</span>;
+    <span class="function">setupConnection</span>(<span class="parameter">conn</span>);
+    <span class="function">log</span>(<span class="string">'接続を受け入れました: '</span> + <span class="parameter">conn</span>.<span class="property">peer</span>);
+});
+
+<span class="comment">// 接続処理</span>
+<span class="keyword">function</span> <span class="function">connect</span>() {
+    <span class="keyword">const</span> <span class="variable">targetId</span> = <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'target-id'</span>).<span class="property">value</span>;
+    <span class="keyword">if</span> (!<span class="variable">targetId</span>) <span class="keyword">return</span>;
+    
+    <span class="variable">connection</span> = <span class="variable">peer</span>.<span class="method">connect</span>(<span class="variable">targetId</span>);
+    <span class="function">setupConnection</span>(<span class="variable">connection</span>);
+    <span class="function">log</span>(<span class="string">'接続を試行中: '</span> + <span class="variable">targetId</span>);
+}
+
+<span class="comment">// 接続設定</span>
+<span class="keyword">function</span> <span class="function">setupConnection</span>(<span class="parameter">conn</span>) {
+    <span class="parameter">conn</span>.<span class="method">on</span>(<span class="string">'open'</span>, <span class="keyword">function</span>() {
+        <span class="function">log</span>(<span class="string">'接続が確立されました'</span>);
+    });
+    
+    <span class="parameter">conn</span>.<span class="method">on</span>(<span class="string">'data'</span>, <span class="keyword">function</span>(<span class="parameter">data</span>) {
+        <span class="function">log</span>(<span class="string">'受信: '</span> + <span class="parameter">data</span>);
+    });
+}
+
+<span class="comment">// メッセージ送信</span>
+<span class="keyword">function</span> <span class="function">sendMessage</span>() {
+    <span class="keyword">const</span> <span class="variable">message</span> = <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'message'</span>).<span class="property">value</span>;
+    <span class="keyword">if</span> (<span class="variable">connection</span> && <span class="variable">connection</span>.<span class="property">open</span> && <span class="variable">message</span>) {
+        <span class="variable">connection</span>.<span class="method">send</span>(<span class="variable">message</span>);
+        <span class="function">log</span>(<span class="string">'送信: '</span> + <span class="variable">message</span>);
+        <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'message'</span>).<span class="property">value</span> = <span class="string">''</span>;
+    }
+}
+
+<span class="comment">// ログ表示</span>
+<span class="keyword">function</span> <span class="function">log</span>(<span class="parameter">message</span>) {
+    <span class="keyword">const</span> <span class="variable">div</span> = <span class="variable">document</span>.<span class="method">createElement</span>(<span class="string">'div'</span>);
+    <span class="variable">div</span>.<span class="property">textContent</span> = <span class="keyword">new</span> <span class="function">Date</span>().<span class="method">toLocaleTimeString</span>() + <span class="string">': '</span> + <span class="parameter">message</span>;
+    <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'messages'</span>).<span class="method">appendChild</span>(<span class="variable">div</span>);
+}
+    <span class="tag">&lt;/script&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+                        </div>
+
+                        <div class="detailed-explanation">
+                            <h4>🔍 詳細な動作解説</h4>
+
+                            <div class="explanation-section">
+                                <h5>1. 基本構造と必要なライブラリの読み込み</h5>
+                                <ul>
+                                    <li><strong>PeerJSライブラリ:</strong>
+                                        <code>&lt;script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"&gt;&lt;/script&gt;</code>でWebRTCを簡単に使えるライブラリを読み込みます。
+                                    </li>
+                                    <li><strong>HTML構造:</strong> 必要最小限のUI要素（ID表示、接続フォーム、メッセージ入力、ログ表示）を配置します。</li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>2. 初期化とグローバル変数</h5>
+                                <ul>
+                                    <li><code>const peer = new Peer();</code>:
+                                        PeerJSのインスタンスを作成。これによりシグナリングサーバーとの接続が開始されます。</li>
+                                    <li><code>let connection = null;</code>: 現在の接続を管理する変数。1対1通信の場合はこれで十分です。</li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>3. IDの取得と表示</h5>
+                                <ul>
+                                    <li><code>peer.on('open', function(id) { ... })</code>:
+                                        PeerJSサーバーから自分のIDが発行されたときに実行されるイベントハンドラです。</li>
+                                    <li>発行されたIDをHTMLの入力欄に表示し、ログにも記録します。このIDを相手に教えることで接続が可能になります。</li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>4. 接続の受け入れ</h5>
+                                <ul>
+                                    <li><code>peer.on('connection', function(conn) { ... })</code>:
+                                        他のピアから接続要求があったときに自動実行されるイベントハンドラです。</li>
+                                    <li>接続オブジェクトを受け取り、<code>setupConnection</code>関数でデータ送受信の準備をします。</li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>5. 能動的な接続</h5>
+                                <ul>
+                                    <li><code>connect()</code>関数: 入力された相手のIDに対して接続を開始します。</li>
+                                    <li><code>peer.connect(targetId)</code>: PeerJSの接続メソッドを使用し、接続オブジェクトを取得します。</li>
+                                    <li>こちらから接続する場合も、同様に<code>setupConnection</code>でイベント処理を設定します。</li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>6. 接続後のイベント処理</h5>
+                                <ul>
+                                    <li><code>conn.on('open', ...)</code>: WebRTCのデータチャネルが開通した時の処理。実際の通信が可能になったことを示します。
+                                    </li>
+                                    <li><code>conn.on('data', ...)</code>: 相手からデータを受信した時の処理。受信したメッセージをログに表示します。</li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>7. メッセージ送信</h5>
+                                <ul>
+                                    <li><code>sendMessage()</code>関数: 入力されたテキストを相手に送信します。</li>
+                                    <li><code>connection.open</code>で接続状態を確認してから<code>connection.send()</code>でデータを送信します。
+                                    </li>
+                                    <li>送信後は入力欄をクリアし、ログに送信内容を記録します。</li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>8. ログ機能</h5>
+                                <ul>
+                                    <li><code>log()</code>関数: 通信の状況を時刻付きでHTMLに表示する補助関数です。</li>
+                                    <li>接続状況、送受信メッセージ、エラー情報などを逐次表示し、通信の流れを視覚的に確認できます。</li>
+                                </ul>
+                            </div>
+
+                            <div class="usage-note">
+                                <h5>💡 使用方法</h5>
+                                <p>このコードをHTMLファイルとして保存し、2つのブラウザタブ（または別のデバイス）で開きます。一方のIDをもう一方に入力して接続すると、リアルタイムでメッセージのやり取りができます。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-section">
+                        <h3>🔧 JavaScriptコードの詳細解説</h3>
+                        <div class="detailed-explanation">
+                            <div class="explanation-section">
+                                <h5>📋 変数宣言とオブジェクト生成</h5>
+                                <div class="code-block syntax-highlight">
+                                    <pre><code><span class="keyword">const</span> <span class="variable">peer</span> = <span class="keyword">new</span> <span class="function">Peer</span>();
+<span class="keyword">let</span> <span class="variable">connection</span> = <span class="null">null</span>;</code></pre>
+                                </div>
+                                <ul>
+                                    <li><code>const peer = new Peer();</code>:
+                                        <strong>Peer</strong>クラスのインスタンスを作成し、<code>peer</code>変数に格納します。このオブジェクトがP2P通信の核となります。
+                                    </li>
+                                    <li><code>let connection = null;</code>:
+                                        現在アクティブな接続を管理する変数です。<code>let</code>で宣言されているため、後から値を変更できます。</li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>🆔 IDイベントハンドラ</h5>
+                                <div class="code-block syntax-highlight">
+                                    <pre><code><span class="variable">peer</span>.<span class="method">on</span>(<span class="string">'open'</span>, <span class="keyword">function</span>(<span class="parameter">id</span>) {
+    <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'my-id'</span>).<span class="property">value</span> = <span class="parameter">id</span>;
+    <span class="function">log</span>(<span class="string">'あなたのID: '</span> + <span class="parameter">id</span>);
+});</code></pre>
+                                </div>
+                                <ul>
+                                    <li><code>peer.on('open', function(id) { ... })</code>:
+                                        <strong>on</strong>メソッドでイベントリスナーを登録します。<code>'open'</code>イベントはID発行時に発火します。</li>
+                                    <li><code>document.getElementById('my-id').value = id;</code>:
+                                        DOMの<strong>getElementById</strong>メソッドで要素を取得し、<code>value</code>プロパティにIDを設定します。
+                                    </li>
+                                    <li><code>log('あなたのID: ' + id);</code>:
+                                        文字列結合（<code>+</code>演算子）を使ってメッセージを作成し、<code>log</code>関数に渡します。</li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>📞 接続受け入れハンドラ</h5>
+                                <div class="code-block syntax-highlight">
+                                    <pre><code><span class="variable">peer</span>.<span class="method">on</span>(<span class="string">'connection'</span>, <span class="keyword">function</span>(<span class="parameter">conn</span>) {
+    <span class="variable">connection</span> = <span class="parameter">conn</span>;
+    <span class="function">setupConnection</span>(<span class="parameter">conn</span>);
+    <span class="function">log</span>(<span class="string">'接続を受け入れました: '</span> + <span class="parameter">conn</span>.<span class="property">peer</span>);
+});</code></pre>
+                                </div>
+                                <ul>
+                                    <li><code>peer.on('connection', function(conn) { ... })</code>:
+                                        他のピアからの接続要求を受信した時のイベントハンドラです。</li>
+                                    <li><code>connection = conn;</code>: 受け取った接続オブジェクトをグローバル変数に代入し、他の関数からアクセス可能にします。
+                                    </li>
+                                    <li><code>conn.peer</code>: 接続オブジェクトの<strong>peer</strong>プロパティには、相手のIDが格納されています。
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>🔗 接続開始関数</h5>
+                                <div class="code-block syntax-highlight">
+                                    <pre><code><span class="keyword">function</span> <span class="function">connect</span>() {
+    <span class="keyword">const</span> <span class="variable">targetId</span> = <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'target-id'</span>).<span class="property">value</span>;
+    <span class="keyword">if</span> (!<span class="variable">targetId</span>) <span class="keyword">return</span>;
+    
+    <span class="variable">connection</span> = <span class="variable">peer</span>.<span class="method">connect</span>(<span class="variable">targetId</span>);
+    <span class="function">setupConnection</span>(<span class="variable">connection</span>);
+}</code></pre>
+                                </div>
+                                <ul>
+                                    <li><code>function connect() { ... }</code>:
+                                        関数宣言により、<code>connect</code>という名前の関数を定義します。</li>
+                                    <li><code>if (!targetId) return;</code>:
+                                        <strong>論理NOT演算子</strong>（<code>!</code>）で値の存在をチェックし、空の場合は<code>return</code>で関数を終了します。
+                                    </li>
+                                    <li><code>peer.connect(targetId)</code>:
+                                        PeerJSの<strong>connect</strong>メソッドで相手との接続を開始し、接続オブジェクトを返します。</li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>⚙️ 接続設定関数</h5>
+                                <div class="code-block syntax-highlight">
+                                    <pre><code><span class="keyword">function</span> <span class="function">setupConnection</span>(<span class="parameter">conn</span>) {
+    <span class="parameter">conn</span>.<span class="method">on</span>(<span class="string">'open'</span>, <span class="keyword">function</span>() {
+        <span class="function">log</span>(<span class="string">'接続が確立されました'</span>);
+    });
+    
+    <span class="parameter">conn</span>.<span class="method">on</span>(<span class="string">'data'</span>, <span class="keyword">function</span>(<span class="parameter">data</span>) {
+        <span class="function">log</span>(<span class="string">'受信: '</span> + <span class="parameter">data</span>);
+    });
+}</code></pre>
+                                </div>
+                                <ul>
+                                    <li><code>function setupConnection(conn) { ... }</code>:
+                                        パラメータ<code>conn</code>を受け取る関数です。接続オブジェクトに必要なイベントリスナーを設定します。</li>
+                                    <li><code>conn.on('open', function() { ... })</code>:
+                                        WebRTCデータチャネルが開通した時のイベントハンドラです。</li>
+                                    <li><code>conn.on('data', function(data) { ... })</code>:
+                                        データ受信時のイベントハンドラで、<code>data</code>パラメータに受信データが渡されます。</li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>📤 メッセージ送信関数</h5>
+                                <div class="code-block syntax-highlight">
+                                    <pre><code><span class="keyword">function</span> <span class="function">sendMessage</span>() {
+    <span class="keyword">const</span> <span class="variable">message</span> = <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'message'</span>).<span class="property">value</span>;
+    <span class="keyword">if</span> (<span class="variable">connection</span> && <span class="variable">connection</span>.<span class="property">open</span> && <span class="variable">message</span>) {
+        <span class="variable">connection</span>.<span class="method">send</span>(<span class="variable">message</span>);
+        <span class="function">log</span>(<span class="string">'送信: '</span> + <span class="variable">message</span>);
+        <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'message'</span>).<span class="property">value</span> = <span class="string">''</span>;
     }
 }</code></pre>
+                                </div>
+                                <ul>
+                                    <li><code>const message = document.getElementById('message').value;</code>:
+                                        メッセージ入力欄の値を取得し、<code>message</code>変数に格納します。</li>
+                                    <li><code>if (connection && connection.open && message)</code>:
+                                        <strong>論理AND演算子</strong>（<code>&&</code>）で複数条件をチェックします。3つすべてが真の場合のみ実行されます。</li>
+                                    <li><code>connection.send(message)</code>:
+                                        接続オブジェクトの<strong>send</strong>メソッドでデータを送信します。</li>
+                                    <li><code>document.getElementById('message').value = '';</code>: 送信後に入力欄を空文字でクリアします。
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="explanation-section">
+                                <h5>📝 ログ表示関数</h5>
+                                <div class="code-block syntax-highlight">
+                                    <pre><code><span class="keyword">function</span> <span class="function">log</span>(<span class="parameter">message</span>) {
+    <span class="keyword">const</span> <span class="variable">div</span> = <span class="variable">document</span>.<span class="method">createElement</span>(<span class="string">'div'</span>);
+    <span class="variable">div</span>.<span class="property">textContent</span> = <span class="keyword">new</span> <span class="function">Date</span>().<span class="method">toLocaleTimeString</span>() + <span class="string">': '</span> + <span class="parameter">message</span>;
+    <span class="variable">document</span>.<span class="method">getElementById</span>(<span class="string">'messages'</span>).<span class="method">appendChild</span>(<span class="variable">div</span>);
+}</code></pre>
+                                </div>
+                                <ul>
+                                    <li><code>const div = document.createElement('div');</code>:
+                                        <strong>createElement</strong>メソッドで新しいdiv要素を作成します。</li>
+                                    <li><code>new Date().toLocaleTimeString()</code>:
+                                        <strong>Date</strong>オブジェクトのインスタンスを生成し、<code>toLocaleTimeString</code>メソッドで現在時刻を文字列化します。
+                                    </li>
+                                    <li><code>div.textContent = ...</code>:
+                                        要素の<strong>textContent</strong>プロパティにテキストを設定します。HTMLタグは解釈されず、純粋なテキストとして表示されます。
+                                    </li>
+                                    <li><code>document.getElementById('messages').appendChild(div);</code>:
+                                        <strong>appendChild</strong>メソッドで作成した要素をDOMに追加します。</li>
+                                </ul>
+                            </div>
                         </div>
-                        <p><strong>解説：</strong>メッセージ入力欄のテキストを、現在接続している全ての相手に送信する関数です。</p>
-                        <ul>
-                            <li><code>const msg = ...</code>: HTMLのメッセージ入力欄から送信したいテキストを取得します。</li>
-                            <li><code>const data = { ... };</code>:
-                                送信するデータをオブジェクトとして作成します。メッセージ本文に加え、送信者のIDなどの追加情報も格納できます。</li>
-                            <li><code>for (const conn of ...)</code>:
-                                <code>connections</code>マップに保存されている全ての接続に対してループ処理を行います。</li>
-                            <li><code>if (conn.open) conn.send(data);</code>:
-                                接続が確立されている（<code>open</code>状態）ことを確認し、<code>send</code>メソッドでデータオブジェクトを相手に送信します。</li>
-                        </ul>
                     </div>
                 </div>
             </section>

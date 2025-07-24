@@ -17,7 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.toggle('open');
         hamburgerMenu.classList.toggle('open');
         if (sidebar.classList.contains('open')) {
-            sidebar.style.width = '280px'; // サイドバーを開く
+            if (window.innerWidth <= 768) {
+                sidebar.style.width = '250px'; // スマホ用サイドバー幅
+            } else {
+                sidebar.style.width = '280px'; // タブレット用サイドバー幅
+            }
         } else {
             sidebar.style.width = '0'; // サイドバーを閉じる
         }

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScriptでのP2P通信（PeerJS）</title>
+    <link rel="stylesheet" href="p2p_guide.css">
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Noto+Sans+JP:wght@300&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="touch-input">
+    <div class="sidebar">
+        <h2>P2P Guide</h2>
+        <ul>
+            <li><a href="#what-is-p2p">#P2P通信とは</a></li>
+            <li><a href="#comparison">#比較</a></li>
+            <li><a href="#use-cases">#活用例</a></li>
+            <li><a href="#demo">#デモ</a></li>
+            <li><a href="#how-to-use">#使用方法</a></li>
+            <li><a href="#code-explanation">#コード解説</a></li>
+            <li><a href="#technical-details">#技術詳細</a></li>
+            <li><a href="#application-example">#応用例</a></li>
+        </ul>
+    </div>
+    <div class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="main-content">
+        <header>
+            <h1 class="main-title">JavaScriptでP2P通信をする方法</h1>
+            <p class="subtitle">PeerJSを使った実践的な解説</p>
+        </header>
+
+        <div class="content">
+            <section id="what-is-p2p" class="section">
+                <h2>#P2P通信とは？</h2>
+                <div class="explanation-card">
+                    <p>
+                        P2P（Peer-to-Peer）通信とは、中央のサーバーを介さずに、個々のノード（コンピュータ）が直接データをやり取りする通信方式です。
+                        一般的なWebアプリはクライアント⇔サーバ型（中央集約型）ですが、P2Pでは各端末が互いにサーバー兼クライアントとなり、より効率的かつ分散的な通信が可能です。
+                    </p>
+                </div>
+                <div class="image-container">
+                    <img src="images/p2p-vs-cs.svg" alt="P2P vs Client-Server">
+                </div>
+            </section>
+
+            <section id="comparison" class="section">
+                <h2>#P2P通信のメリットとデメリット</h2>
+                <div class="table-container">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>項目</th>
+                                <th class="merit">メリット</th>
+                                <th class="demerit">デメリット</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>サーバ不要</strong></td>
+                                <td>中央サーバなしで通信が成立</td>
+                                <td>初期接続にはシグナリングが必要</td>
+                            </tr>
+                            <tr>
+                                <td><strong>冗長性</strong></td>
+                                <td>一部ノードが落ちても通信可能</td>
+                                <td>各ノードの安定性に依存</td>
+                            </tr>
+                            <tr>
+                                <td><strong>コスト</strong></td>
+                                <td>運用コストが低い</td>
+                                <td>セキュリティ管理が分散</td>
+                            </tr>
+                            <tr>
+                                <td><strong>スケーラビリティ</strong></td>
+                                <td>ノード増加で性能拡張</td>
+                                <td>管理が複雑化</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="use-cases" class="section">
+                <h2>#P2P通信の活用例</h2>
+                <div class="use-cases-grid">
+                    <div class="use-case-card">
+                        <h4>ファイル共有</h4>
+                        <p>例：BitTorrent</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h4>ビデオ・音声通話</h4>
+                        <p>例：WebRTC</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h4>ブロックチェーン</h4>
+                        <p>例：Bitcoin</p>
+                    </div>
+                    <div class="use-case-card">
+                        <h4>分散型SNS</h4>
+                        <p>例：Mastodon</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="demo" class="section">
+                <h2>#実際のP2P通信を試してみよう</h2>
+                <div class="demo-container">
+                    <div class="demo-card">
+                        <h3>リアルタイム通信デモ</h3>
+                        <p>以下のフォームを使って、相手のIDを入力し接続し、テキストを送信できます。</p>
+
+                        <div class="input-group">
+                            <label>あなたのID（自動生成）:</label>
+                            <input type="text" id="my-id" readonly class="id-input">
+                            <button onclick="copyToClipboard()" class="copy-btn">コピー</button>
+                        </div>
+
+                        <div class="input-group">
+                            <label>接続したい相手のID:</label>
+                            <input type="text" id="target-id" class="target-input" placeholder="相手のIDを入力してください">
+                            <button onclick="connect()" class="connect-btn">接続</button>
+                        </div>
+
+                        <div class="input-group">
+                            <label>メッセージ:</label>
+                            <input type="text" id="msg" class="msg-input" placeholder="送信したいメッセージを入力"
+                                onkeypress="handleEnterKey(event)">
+                            <button onclick="send()" class="send-btn">送信</button>
+                        </div>
+
+                        <div class="log-section">
+                            <h4>通信ログ:</h4>
+                            <pre id="log" class="log-display"></pre>
+                            <button onclick="clearLog()" class="clear-btn">ログクリア</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="how-to-use" class="section">
+                <h2>#使用方法（2人で試す）</h2>
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>ページを2人で開く</h4>
+                        <p>同じLANまたはインターネット経由で2人がこのページを開きます。</p>
+                        <p>１人で試す場合は、ブラウザでこのページを２つ開いてください</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>IDをコピー・共有</h4>
+                        <p>一方の人が自分のIDをコピーして、もう一方の人に教えます。</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>接続する</h4>
+                        <p>教えてもらったIDを「相手のID」欄に入力して「接続」ボタンを押します。</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h4>メッセージ送信</h4>
+                        <p>メッセージを入力して「送信」ボタンを押すと、リアルタイムで相手に届きます。</p>
+                    </div>
+                </div>
+            </section>
+
+
+            <section id="code-explanation" class="section">
+                <h2>#JavaScriptコードの解説</h2>
+                <div class="code-explanation">
+                    <div class="code-section">
+                        <h3>🚀 初期化部分</h3>
+                        <div class="code-block">
+                            <pre><code>const peer = new Peer();
+const connections = new Map();
+let myPeerId = null;</code></pre>
+                        </div>
+                        <p><strong>解説：</strong>P2P通信の土台を準備するコードです。各変数が重要な役割を担います。</p>
+                        <ul>
+                            <li><code>const peer = new Peer();</code>:
+                                PeerJSライブラリの心臓部である<code>Peer</code>オブジェクトを生成します。これがシグナリングサーバーとの通信や、他のピアとの接続管理を行います。</li>
+                            <li><code>const connections = new Map();</code>:
+                                接続が確立された相手の情報を管理するための<code>Map</code>オブジェクトです。キーに相手のID、値に接続オブジェクトを保存し、複数の相手との通信を可能にします。
+                            </li>
+                            <li><code>let myPeerId = null;</code>:
+                                PeerJSサーバーから割り当てられる自分自身のユニークなIDを格納するための変数です。接続時にこのIDが他のピアに通知されます。</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-section">
+                        <h3>🔗 接続処理</h3>
+                        <div class="code-block">
+                            <pre><code>function connect() {
+    const targetId = document.getElementById('target-id').value;
+    if (!targetId || targetId === myPeerId) return;
+    const conn = peer.connect(targetId);
+    setupConnection(conn);
+}</code></pre>
+                        </div>
+                        <p><strong>解説：</strong>「接続」ボタンが押されたときに、指定された相手にP2P接続を開始する関数です。</p>
+                        <ul>
+                            <li><code>const targetId = ...</code>: HTMLの入力欄から、接続したい相手のIDを取得します。</li>
+                            <li><code>if (!targetId || ...)</code>: IDが入力されていない、または自分のIDと同じ場合は、処理を中断します。</li>
+                            <li><code>const conn = peer.connect(targetId);</code>:
+                                <code>peer</code>オブジェクトの<code>connect</code>メソッドを使い、相手のIDに対してデータ接続を開始します。これにより接続オブジェクト<code>conn</code>が返されます。
+                            </li>
+                            <li><code>setupConnection(conn);</code>:
+                                生成された接続オブジェクトに対して、データ受信時や接続完了時などのイベントハンドラを設定する別の関数を呼び出します。</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-section">
+                        <h3>📨 メッセージ送信</h3>
+                        <div class="code-block">
+                            <pre><code>function send() {
+    const msg = document.getElementById('msg').value;
+    const data = { type: 'text', text: msg, senderId: myPeerId };
+    
+    for (const conn of connections.values()) {
+        if (conn.open) conn.send(data);
+    }
+}</code></pre>
+                        </div>
+                        <p><strong>解説：</strong>メッセージ入力欄のテキストを、現在接続している全ての相手に送信する関数です。</p>
+                        <ul>
+                            <li><code>const msg = ...</code>: HTMLのメッセージ入力欄から送信したいテキストを取得します。</li>
+                            <li><code>const data = { ... };</code>:
+                                送信するデータをオブジェクトとして作成します。メッセージ本文に加え、送信者のIDなどの追加情報も格納できます。</li>
+                            <li><code>for (const conn of ...)</code>:
+                                <code>connections</code>マップに保存されている全ての接続に対してループ処理を行います。</li>
+                            <li><code>if (conn.open) conn.send(data);</code>:
+                                接続が確立されている（<code>open</code>状態）ことを確認し、<code>send</code>メソッドでデータオブジェクトを相手に送信します。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+
+            <section id="technical-details" class="section">
+                <h2>#技術的な詳細</h2>
+                <div class="tech-details">
+                    <div class="tech-card">
+                        <h4>使用技術</h4>
+                        <ul>
+                            <li><strong>PeerJS:</strong> WebRTCを簡単に使えるライブラリ</li>
+                            <li><strong>WebRTC:</strong> ブラウザ間のリアルタイム通信API</li>
+                            <li><strong>JavaScript:</strong> フロントエンド制御</li>
+                        </ul>
+                    </div>
+                    <div class="tech-card">
+                        <h4>通信の流れ</h4>
+                        <ol>
+                            <li>PeerJSサーバーからIDを取得</li>
+                            <li>IDを交換してシグナリング</li>
+                            <li>WebRTCでP2P接続確立</li>
+                            <li>直接データ通信開始</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="image-container">
+                    <img src="images/webrtc-flow.svg" alt="WebRTC Flow">
+                </div>
+            </section>
+        </div>
+
+        <section id="application-example" class="section">
+            <h2>#実践的な応用例</h2>
+            <div class="explanation-card">
+                <p>
+                    このP2P技術を応用して、リアルタイムでメッセージを交換できるウェブアプリケーションを作成しました。以下のリンクから実際に試したり、ソースコードを確認したりできます。
+                </p>
+                <div class="app-links">
+                    <a href="https://hisa11.github.io/P2P-mesage/" target="_blank" class="app-link-btn">アプリを試す</a>
+                    <a href="https://github.com/hisa11/P2P-mesage" target="_blank"
+                        class="app-link-btn github">GitHubリポジトリ</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>&copy; 2025 P2P Communication Guide | Powered by PeerJS & WebRTC</p>
+        </footer>
+    </div>
+
+    <button id="scrollToTopBtn" title="Go to top">Top</button>
+    <script src="p2p_guide.js"></script>
+</body>
+
+</html>

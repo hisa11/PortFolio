@@ -1,3 +1,63 @@
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+  .app-card {
+    width: 90vw;
+    max-width: 340px;
+    padding: 16px 8px 14px 8px;
+  }
+  .app-image {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 8px;
+  }
+
+  /* ハンバーガーメニューのリンク間隔調整 */
+  .sidebar ul li {
+    padding: 12px 9px;
+  }
+
+  /* タイムラインの縦方向レイアウト調整 */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .timeline-image {
+    width: 90%;
+    height: auto;
+    margin-bottom: 12px;
+  }
+
+  /* アプリカードの余白調整 */
+  .app-card {
+    margin: 0 auto 16px;
+  }
+
+  /* 全体的なフォントサイズ調整 */
+  body {
+    font-size: 14px;
+  }
+
+  h2, h3 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
 /* アプリ一覧セクション */
 .app-container {
     display: flex;
@@ -884,4 +944,315 @@ header h1 {
     .contact img:hover {
         animation: bounce 2s infinite;
     }
+}
+
+/* ===========================================
+   スマホ向け包括的最適化（全ての既存スタイルを上書き）
+   =========================================== */
+@media screen and (max-width: 768px) {
+  /* 画面幅の固定とスクロールバーの防止 */
+  html {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  body {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    max-width: 100vw;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+
+  /* メインコンテンツの完全調整 */
+  .main-content {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin-left: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+  }
+
+  /* ヘッダーの調整 */
+  header {
+    padding: 10px 15px !important;
+    margin-top: 60px !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  header h1 {
+    font-size: 22px !important;
+    text-align: center !important;
+    margin: 0 !important;
+  }
+
+  /* コンテンツの調整 */
+  .content {
+    padding: 10px 15px !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* セクションの調整 */
+  section {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 15px 0 !important;
+    box-sizing: border-box;
+  }
+
+  /* Aboutセクションの調整 */
+  .post-it {
+    width: 90% !important;
+    max-width: 280px !important;
+    float: none !important;
+    margin: 0 auto 20px auto !important;
+    display: block !important;
+    transform: rotate(-1deg) !important;
+  }
+
+  .about-text {
+    clear: both !important;
+    text-align: left !important;
+    width: 100% !important;
+  }
+
+  /* スキルセクションの調整 */
+  .skill-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 100% !important;
+  }
+
+  .skill {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 15px !important;
+    background: #f9f9f9 !important;
+    border-radius: 8px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .skill-image {
+    width: 50px !important;
+    height: 50px !important;
+    margin: 10px auto !important;
+    display: block !important;
+  }
+
+  /* ツールセクションの調整 */
+  .tools {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 100% !important;
+  }
+
+  /* アプリカードの調整 */
+  .app-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    align-items: center !important;
+    padding: 0 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  .app-card {
+    width: 90% !important;
+    max-width: 340px !important;
+    padding: 16px !important;
+    margin: 0 auto 16px auto !important;
+    box-sizing: border-box !important;
+  }
+  
+  .app-image {
+    width: 60px !important;
+    height: 60px !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* タイムラインの調整 */
+  .timeline {
+    padding-left: 20px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .timeline-item {
+    margin-bottom: 30px !important;
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  .timeline-date {
+    font-size: 14px !important;
+    font-weight: bold !important;
+    color: #666 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .timeline-content {
+    background: #f9f9f9 !important;
+    padding: 15px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .timeline-content h4 {
+    font-size: 16px !important;
+    margin: 0 0 10px 0 !important;
+  }
+
+  .timeline-image {
+    width: 100% !important;
+    max-width: 300px !important;
+    height: auto !important;
+    margin: 10px auto !important;
+    display: block !important;
+    border-radius: 8px !important;
+  }
+
+  /* コンタクトセクションの調整 */
+  .contact {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 20px 15px !important;
+    box-sizing: border-box !important;
+  }
+
+  .contact img {
+    width: 15% !important;
+    min-width: 40px !important;
+    max-width: 60px !important;
+    height: auto !important;
+    margin: 0 10px !important;
+  }
+
+  /* サイドバーの調整 */
+  .sidebar {
+    width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .sidebar.open {
+    width: 250px !important;
+  }
+
+  .sidebar ul li {
+    padding: 12px 9px !important;
+  }
+
+  .sidebar ul li a {
+    font-size: 18px !important;
+    padding: 10px 15px !important;
+  }
+
+  /* ハンバーガーメニューの改善 */
+  .hamburger-menu {
+    display: flex !important;
+    position: fixed !important;
+    top: 15px !important;
+    left: 15px !important;
+    z-index: 103 !important;
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .hamburger-menu .bar {
+    height: 4px !important;
+    border-radius: 2px !important;
+  }
+
+  /* フォントサイズの調整 */
+  h2 {
+    font-size: 20px !important;
+    margin: 20px 0 15px 0 !important;
+  }
+
+  h3 {
+    font-size: 18px !important;
+    margin: 15px 0 10px 0 !important;
+  }
+
+  h4 {
+    font-size: 16px !important;
+    margin: 10px 0 8px 0 !important;
+  }
+
+  p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin: 8px 0 !important;
+  }
+
+  /* Topボタンの完全修正 */
+  #scrollToTopBtn {
+    position: fixed !important;
+    bottom: 15px !important;
+    right: 15px !important;
+    padding: 10px 14px !important;
+    font-size: 12px !important;
+    border-radius: 6px !important;
+    z-index: 100 !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+    background-color: #9f9f9f !important;
+    border: none !important;
+    color: #000 !important;
+    cursor: pointer !important;
+    opacity: 0 !important;
+    transition: opacity 0.2s ease-in-out, background-color 0.3s ease-in-out !important;
+    max-width: none !important;
+    width: auto !important;
+  }
+
+  #scrollToTopBtn.show {
+    opacity: 1 !important;
+  }
+
+  #scrollToTopBtn:hover {
+    background-color: #d9d9d9 !important;
+  }
+
+  /* 星評価の調整 */
+  .star-rating {
+    font-size: 16px !important;
+    display: inline-block !important;
+  }
+
+  /* 自己紹介セクションの調整 */
+  .self-introduction {
+    width: 100% !important;
+    padding: 10px !important;
+    background: #f5f5f5 !important;
+    border-radius: 8px !important;
+    margin: 10px 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .self-introduction p {
+    margin: 5px 0 !important;
+    text-align: left !important;
+  }
+
+  /* 全ての要素に対するボックスサイジング設定 */
+  *, *::before, *::after {
+    box-sizing: border-box !important;
+    max-width: 100vw !important;
+  }
+
+  /* イメージの最大幅制限 */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
 }
